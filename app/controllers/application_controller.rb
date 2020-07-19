@@ -51,4 +51,3 @@ class ApplicationController < Sinatra::Base
     erb :delete
     end
   end
-#end
