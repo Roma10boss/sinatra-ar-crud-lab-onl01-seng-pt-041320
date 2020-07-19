@@ -113,30 +113,23 @@ describe "Magazine App" do
 
   end
 
-   describe "delete action" do
-
+  describe "delete action" do
 
     it 'responds with a 200 status code' do
-      get "/posts/#{@post2.id}"
+      get "/articles/#{@article2.id}"
       expect(last_response.status).to eq(200)
     end
 
-    it "deletes a blog post from the database" do
-      visit "/posts/#{@post2.id}"
-      click_button "delete"
-      expect(Post.all.count).to eq(1)
-      expect(Post.last.name).to eq("Hello World")
-    end
-
-    it "displays a view telling us which post was deleted" do
-      visit "/posts/#{@post2.id}"
-      click_button "delete"
-      expect(page.body).to include("#{@post2.name} was deleted")
+    it "deletes an article from the database" do
+      visit "/articles/#{@article2.id}"
+      page.find(:css, "form [type=submit]").click
+      expect(Article.all.count).to eq(1)
+      expect(Article.last.title).to eq("Hello World!!!!")
     end
 
     it "submits the form via a delete request" do
-      visit "/posts/#{@post2.id}"
-      expect(find("#hidden", :visible => false).value).to eq("delete")
+      visit "/articles/#{@article2.id}"
+      expect(find("[name=_method]", :visible => false).value).to match(/delete/i)
     end
 
   end
