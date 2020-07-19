@@ -120,7 +120,7 @@ describe "Magazine App" do
       expect(last_response.status).to eq(200)
     end
 
-    it "deletes an article from the database" do
+    #it "deletes an article from the database" do
       visit "/articles/#{@article2.id}"
       page.find(:css, "form [type=submit]").click
       expect(Article.all.count).to eq(1)
